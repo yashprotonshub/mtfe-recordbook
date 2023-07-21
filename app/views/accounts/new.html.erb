@@ -1,0 +1,12 @@
+<%= form_with model: Account.new do |f| %>
+    <%= f.label "Name" %>
+    <%= f.text_field :name %>
+    <br>
+    <%= f.label "Amount" %>
+    <%= f.text_field :base_amount %>
+
+    <div>
+        <%= f.submit "Submit Data" %>
+    </div>
+<% end %>
+

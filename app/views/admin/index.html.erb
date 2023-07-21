@@ -1,0 +1,35 @@
+<h1 style="text-align: center;"> WELCOME TO MTFE RECORD BOOk</h1>
+<% c= 1 %>
+<% if @all_accounts.length > 0 %>
+    <table>
+        <thead>
+          <tr>
+            <th>S No</th>
+            <th class="name-column">Name</th>
+            <th>Base Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+    <% for account in @all_accounts %>
+        <tbody>
+            <tr>
+                <td> <%= c %> </td>
+                <td> <%=  link_to account.name, admin_path(account.id), style:"text-decoration:none; color:inherit" %> </td>
+                <td> <%= account.base_amount %> &nbsp; &nbsp; <%= link_to "Edit Amount", edit_account_path(account.id), style:"text-decoration:none;" %> </td>
+                <td>  <%= link_to "Delete Member", account_path(account.id), method: :delete, style:"text-decoration:none; color:red; "%> </td>
+            </tr>
+        </tbody>
+    <% c+=1 %>
+    <% end %>
+    </table>
+<% end %>
+<br> 
+<div style="text-align: center;">
+    <%= link_to "Add New Member", new_account_path, style:"text-decoration:none ; color:green;" %>
+</div>
+<br /> <br /> 
+<div style="text-align: center; font-size:30px;" >
+    YOUR TOTAL INVESTMENT IS <%= Account.all.sum(:base_amount) %> $
+</div>
+
+

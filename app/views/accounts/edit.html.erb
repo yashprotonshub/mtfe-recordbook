@@ -1,0 +1,7 @@
+<%= form_with model:@account do |f| %>
+    <%= f.label "Enter Updated Amount" %>
+    <%= f.text_field :base_amount %>
+    <div>
+        <%= f.submit "Submit Data" %>
+    </div>
+<% end %>

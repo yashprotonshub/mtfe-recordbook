@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  current_value: 1.5
+  last_value: 1.5
+  diffrence: MyString
+  account: one
+
+two:
+  current_value: 1.5
+  last_value: 1.5
+  diffrence: MyString
+  account: two
