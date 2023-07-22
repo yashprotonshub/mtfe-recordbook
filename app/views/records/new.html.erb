@@ -1,0 +1,21 @@
+<%= form_with model:[@account,@record] do |f| %>
+    <div>
+        <%= f.label "Enter Current Value" %>
+        <%= f.text_field :current_value %>
+    </div>
+
+    <div>
+        <%= f.label "Enter last Value" %>
+        <%= f.text_field :last_value %>
+    </div>
+
+    <div>
+        <%= f.label "Enter Commision for Today" %>
+        <%= f.text_field :added_commision %>
+    </div>
+
+    <div>
+        <%= f.submit "Enter to Submit Data" %>
+    </div>
+<% end %>
+

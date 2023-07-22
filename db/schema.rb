@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2023_07_21_160704) do
     t.datetime "updated_at", null: false
     t.float "added_commision"
     t.float "total_commision"
+    t.float "grand_total"
     t.index ["account_id"], name: "index_records_on_account_id"
   end
 

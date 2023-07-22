@@ -2,6 +2,10 @@ class AccountsController < ApplicationController
     def new
     end
 
+    def show
+        @account= Account.find(params[:id])
+    end
+
     def create
         @new_account=Account.new(account_params)
         if @new_account.save

@@ -1,0 +1,45 @@
+<h1 style="text-align: center;">Record Book for <%= @account.name %> </h1>
+<h2> Your Starting Amount is <%= @account.base_amount  %>$ </h2>
+<p>
+    <%= link_to "New Entry for today", new_account_record_path(@account.id), style:"text-decoration:none; color:yellow" %>
+    &nbsp;&nbsp;
+    <%= link_to "Back", root_path, style:"text-decoration:none" %>
+</p>
+<% c=1 %>
+<% if @account.records.length > 0 %>
+<table>
+    <thead>
+      <tr>
+        <th>S No</th>
+        <th> Date </th>
+        <th >Today's Value</th>
+        <th>Last Value</th>
+        <th>Result</th>
+        <th>Today's Commision</th>
+        <th>Total Commision</th>
+        <th>Grand Total</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% for record in @account.records %>
+        <tr>
+            <td> <%= c %> </td>
+            <td><%= record.created_at.strftime("%d %b %y") %></td>
+            <td> <%= record.current_value %> </td>
+            <td> <%= record.last_value %> </td>
+            <td> <%= record.diffrence %></td>
+            <td> <%= record.added_commision %> </td>
+            <td> <%= record.total_commision %> </td>
+            <td> <%= record.current_value + record.added_commision %> </td>
+            <td> <%= link_to "Delete Entry", account_record_path(@account.id,record.id), style:"text-decoration:none; color:red;", method: :delete %> </td>
+        </tr>
+        <% end %>
+    </tbody>
+<% c+=1 %>
+</table>
+<% else %>
+  <h2 style="text-align: center; padding-top:200px; font-size:50px;">
+    No Record Found
+  </h2>
+<% end %>
