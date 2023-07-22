@@ -21,14 +21,15 @@ ActiveRecord::Schema.define(version: 2023_07_21_160704) do
 
   create_table "records", force: :cascade do |t|
     t.float "current_value"
-    t.float "last_value"
+    t.float "last_value", default: 0.0
     t.string "diffrence"
     t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "added_commision"
-    t.float "total_commision"
-    t.float "grand_total"
+    t.float "added_commision", default: 0.0
+    t.float "total_commision", default: 0.0
+    t.float "grand_total_without_commision", default: 0.0
+    t.float "grand_total", default: 0.0
     t.index ["account_id"], name: "index_records_on_account_id"
   end
 

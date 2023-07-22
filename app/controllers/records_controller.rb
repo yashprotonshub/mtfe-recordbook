@@ -1,9 +1,27 @@
 class RecordsController < ApplicationController
     def create
-        debugger
         @account = Account.find(params[:account_id])
-        if(params[:record]["current_value"].to_i>params[:record]["last_value"].to_i)
-            @record= @account.records.new(current_value:params[:record]["current_value"], last_value:params[:record]["last_value"], diffrence:"Positive", added_commision: params[:record]["added_commision"], total_commision: params[:record]["total_commision"],)
+        if @account.records.exists?
+            if params[:record][:current_value].to_f > @account.records.last.current_value
+                @record = @account.records.new( current_value: params[:record][:current_value].to_f, last_value: @account.records.last.current_value, diffrence: "Positive", added_commision: params[:record][:added_commision].to_f, total_commision: @account.records.last.total_commision + params[:record][:added_commision].to_f, grand_total_without_commision: (params[:record][:current_value].to_f - @account.base_amount).round(2), grand_total: (params[:record][:current_value].to_f - @account.base_amount + @account.records.last.total_commision + params[:record][:added_commision].to_f).round(2) )
+                @record.save
+                redirect_to account_path(@account.id)
+            else
+                @record= @account.records.new( current_value: params[:record][:current_value].to_f, last_value: @account.records.last.current_value, diffrence: "Negative", added_commision: params[:record][:added_commision].to_f, total_commision: @account.records.last.total_commision + params[:record][:added_commision].to_f, grand_total_without_commision: (params[:record][:current_value].to_f - @account.base_amount).round(2), grand_total: (params[:record][:current_value].to_f - @account.base_amount + @account.records.last.total_commision + params[:record][:added_commision].to_f).round(2) )
+                @record.save
+                redirect_to account_path(@account.id)
+            end
+
+        else
+            if params[:record][:current_value].to_f > @account.base_amount
+                @record= @account.records.new(current_value: params[:record][:current_value], last_value: @account.base_amount, diffrence:"Positve", added_commision: params[:record][:added_commision], total_commision: params[:record][:added_commision], grand_total:params[:record][:current_value].to_f -  @account.base_amount +  params[:record][:added_commision].to_f, grand_total_without_commision: params[:record][:current_value].to_f - @account.base_amount.to_f)
+                @record.save
+                redirect_to account_path(@account.id)
+            else
+                @record= @account.records.new(current_value: params[:record][:current_value], last_value: @account.base_amount, diffrence:"Negative", added_commision: params[:record][:added_commision], total_commision: params[:record][:added_commision], grand_total:params[:record][:current_value].to_f -  @account.base_amount +  params[:record][:added_commision].to_f, grand_total_without_commision: params[:record][:current_value].to_f - @account.base_amount.to_f)
+                @record.save
+                redirect_to account_path(@account.id)
+            end
         end
     end
 
