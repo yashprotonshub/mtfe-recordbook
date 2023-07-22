@@ -1,0 +1,10 @@
+<%= form_with(model: @account, url: updating_account_name_path(@account), method: :patch) do |f| %>    
+    <div>
+        <%= f.label "Name" %>
+        <%= f.text_field :name %>
+    </div>
+
+    <div>
+        <%= f.submit %>
+    </div>
+<% end %>

@@ -13,8 +13,18 @@ class AccountsController < ApplicationController
         @account= Account.find(params[:id])
     end
 
-    def update
+    def edit_account_name
         @account = Account.find(params[:id])
+    end
+
+    def updating_account_name
+        @account= Account.find(params[:id])
+        @account.update(name:params[:account][:name])
+        redirect_to root_path
+    end
+
+    def update
+        @account= Account.find(params[:id])
         @account.update(base_amount:params[:account][:base_amount].to_i)
         redirect_to root_path
     end
