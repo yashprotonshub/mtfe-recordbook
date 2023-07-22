@@ -16,7 +16,7 @@
                 <td> <%= c %> </td>
                 <td> <%=  link_to account.name, account_path(account.id), style:"text-decoration:none; color:inherit" %> &nbsp;&nbsp; <%= link_to "Edit Name", edit_account_name_path(account.id), style:"text-decoration:none" %> </td>
                 <td> <%= account.base_amount %> &nbsp; &nbsp; <%= link_to "Edit Amount", edit_account_path(account.id), style:"text-decoration:none;" %> </td>
-                <td>  <%= link_to "Delete Member", account_path(account.id), method: :delete, style:"text-decoration:none; color:red; "%> </td>
+                <td>  <%= link_to "Delete Member", account_path(account.id), method: :delete, data: { confirm: "Are you sure you want to delete this entry?" },style:"text-decoration:none; color:red; "%> </td>
             </tr>
         </tbody>
     <% c+=1 %>

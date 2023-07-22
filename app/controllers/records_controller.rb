@@ -14,11 +14,11 @@ class RecordsController < ApplicationController
 
         else
             if params[:record][:current_value].to_f > @account.base_amount
-                @record= @account.records.new(current_value: params[:record][:current_value], last_value: @account.base_amount, diffrence:"Positve", added_commision: params[:record][:added_commision], total_commision: params[:record][:added_commision], grand_total:params[:record][:current_value].to_f -  @account.base_amount +  params[:record][:added_commision].to_f, grand_total_without_commision: params[:record][:current_value].to_f - @account.base_amount.to_f)
+                @record= @account.records.new(current_value: params[:record][:current_value], last_value: @account.base_amount, diffrence:"Positve", added_commision: params[:record][:added_commision], total_commision: params[:record][:added_commision], grand_total:(params[:record][:current_value].to_f -  @account.base_amount +  params[:record][:added_commision].to_f).round(2), grand_total_without_commision: (params[:record][:current_value].to_f - @account.base_amount.to_f).round(2))
                 @record.save
                 redirect_to account_path(@account.id)
             else
-                @record= @account.records.new(current_value: params[:record][:current_value], last_value: @account.base_amount, diffrence:"Negative", added_commision: params[:record][:added_commision], total_commision: params[:record][:added_commision], grand_total:params[:record][:current_value].to_f -  @account.base_amount +  params[:record][:added_commision].to_f, grand_total_without_commision: params[:record][:current_value].to_f - @account.base_amount.to_f)
+                @record= @account.records.new(current_value: params[:record][:current_value], last_value: @account.base_amount, diffrence:"Negative", added_commision: params[:record][:added_commision], total_commision: params[:record][:added_commision], grand_total:(params[:record][:current_value].to_f -  @account.base_amount +  params[:record][:added_commision].to_f).round(2), grand_total_without_commision: (params[:record][:current_value].to_f - @account.base_amount.to_f).round(2))
                 @record.save
                 redirect_to account_path(@account.id)
             end
@@ -27,6 +27,7 @@ class RecordsController < ApplicationController
 
     def new
         @account = Account.find(params[:account_id])
+        @last_current_value = @account.records.last.current_value.to_s + " is your last value"
         @record= @account.records.new
     end
 

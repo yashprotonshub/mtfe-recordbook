@@ -1,5 +1,5 @@
 <h1 style="text-align: center;">Record Book for <%= @account.name %> </h1>
-<h2> Your Starting Amount is <%= @account.base_amount %>$ </h2>
+<h2> Your Starting Amount is <%= @account.base_amount %> $ </h2>
 <p>
     <%= link_to "New Entry for today", new_account_record_path(@account.id), style:"text-decoration:none; color:yellow" %>
     &nbsp;&nbsp;
@@ -34,7 +34,7 @@
             <td> <%= record.total_commision %> $ </td>
             <td> <%= record.grand_total %> $ </td>
             <td> <%= record.grand_total_without_commision %> $ </td>
-            <td> <%= link_to "Delete Entry", account_record_path(@account.id,record.id), style:"text-decoration:none; color:red;", method: :delete %> </td>
+            <td> <%= link_to "Delete Entry", account_record_path(@account.id,record.id), data: { confirm: "Are you sure you want to delete this entry?" },style:"text-decoration:none; color:red;", method: :delete %> </td>
         </tr>
         <% end %>
     </tbody>
