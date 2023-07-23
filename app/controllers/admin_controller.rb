@@ -3,4 +3,6 @@ class AdminController < ApplicationController
         @all_accounts= Account.all 
     end
 
+    
+
 end

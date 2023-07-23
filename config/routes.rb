@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get "/accounts/:id/edit_account_name", to: "accounts#edit_account_name", as: "edit_account_name"
   patch "/accounts/:id/updating_account_name", to: "accounts#updating_account_name", as: "updating_account_name"
   root "admin#index"
+  get 'accounts/:id/generate_pdf', to: 'records#generate_pdf', as: 'generate_pdf'
+  
 end

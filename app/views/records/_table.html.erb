@@ -1,0 +1,58 @@
+<!-- app/views/records/generate_table.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PDF Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    /* Add any additional styles here */
+  </style>
+</head>
+<body>
+  <table>
+    <% c = 1 %>
+    <thead>
+      <tr>
+        <th>S No</th>
+        <th>Date</th>
+        <th>Today's Value</th>
+        <th>Last Value</th>
+        <th>Result</th>
+        <th>Today's Commission</th>
+        <th>Total Commission</th>
+        <th>Total Profit</th>
+        <th>Total Profit Without Commission</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for record in @account.records %>
+      <tr>
+        <td><%= c %></td>
+        <td><%= record.created_at.strftime("%d %b %y") %></td>
+        <td><%= record.current_value %> $</td>
+        <td><%= record.last_value %> $</td>
+        <td><%= record.diffrence %></td>
+        <td><%= record.added_commision %> $</td>
+        <td><%= record.total_commision %> $</td>
+        <td><%= record.grand_total %> $</td>
+        <td><%= record.grand_total_without_commision %> $</td>
+        <td><%= link_to "Delete Entry", account_record_path(@account.id, record.id), data: { confirm: "Are you sure you want to delete this entry?" }, style: "text-decoration:none; color:red;", method: :delete %></td>
+      </tr>
+      <% c += 1 %>
+      <% end %>
+    </tbody>
+  </table>
+
+</body>
+</html>
